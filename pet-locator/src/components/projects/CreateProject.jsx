@@ -3,11 +3,20 @@ import { connect } from 'react-redux'
 import { createProject } from '../../store/actions/projectActions'
 import { Redirect } from 'react-router-dom'
 
+   
 class CreateProject extends Component {
   state = {
     title: '',
-    content: ''
+    animalType: '',
+    content: '', 
+    address: '',
+    state: '',
+    zipCode: '',
+    image: null,
+    url: '',
+    progress: 0
   }
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -19,25 +28,43 @@ class CreateProject extends Component {
     this.props.createProject(this.state);
     this.props.history.push('/');
   }
+
+
   render() {
+
+
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to='/signin' /> 
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Create a New Project</h5>
+          <h5 className="grey-text text-darken-3">Post for a Lost or Found Pet</h5>
           <div className="input-field">
             <input type="text" id='title' onChange={this.handleChange} />
-            <label htmlFor="title">Project Title</label>
+            <label htmlFor="title">Post Title</label>
           </div>
           <div className="input-field">
             <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
-            <label htmlFor="content">Project Content</label>
+            <label htmlFor="content">Comment</label>
           </div>
           <div className="input-field">
-            <button className="btn waves-effect waves-light teal darken-4">Create</button>
+            <textarea id="animalType" className="materialize-textarea" onChange={this.handleChange}></textarea>
+            <label htmlFor="animalType">Animal Type</label>
+          </div>
+          <div className="input-field">
+            <textarea id="address" className="materialize-textarea" onChange={this.handleChange}></textarea>
+            <label htmlFor="address">Address</label>
+          </div>
+          
+          <div className="input-field">
+            <textarea id="zipCode" className="materialize-textarea" onChange={this.handleChange}></textarea>
+            <label htmlFor="zipCode">Zip Code</label>
+          </div> 
+          <div className="input-field">
+            <button className="btn pink lighten-1">Create</button>
           </div>
         </form>
+         
       </div>
     )
   }

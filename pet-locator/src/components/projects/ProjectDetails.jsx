@@ -6,7 +6,13 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 
 const ProjectDetails = (props) => {
+
+  console.log(props, "<---- this is props")
+  console.log(props.match.params.id, "<---- this is project id")
+
+
   const { project, auth } = props;
+
   if (!auth.uid) return <Redirect to='/signin' /> 
   if (project) {
     return (
@@ -14,7 +20,15 @@ const ProjectDetails = (props) => {
         <div className="card z-depth-0">
           <div className="card-content">
             <span className="card-title">{project.title}</span>
-            <p>{project.content}</p>s
+            <p>{props.match.params.id}</p>
+
+            <p>{project.content}</p>
+            <label>Animal Type</label>
+              <p>{project.animalType}</p>
+            <label>Address</label>
+             <p>{project.address}</p>
+             <label>Zip Code</label>
+             <p>{project.zipCode}</p>
           </div>
           <div className="card-action grey lighten-4 grey-text">
             <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
@@ -40,6 +54,13 @@ const mapStateToProps = (state, ownProps) => {
   return {
     project: project,
     auth: state.firebase.auth
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createProject: (project) => dispatch(createProject(project))
   }
 }
 
