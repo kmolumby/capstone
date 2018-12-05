@@ -1,18 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
+import { firestoreConnect} from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
+import { removeProject } from '../../store/actions/projectActions';
 
 const ProjectDetails = (props) => {
-
-  console.log(props, "<---- this is props")
-  console.log(props.match.params.id, "<---- this is project id")
-
-
   const { project, auth } = props;
-
+  const id = props.match.params.id
+  console.log(id, "<----- this id from project details")
   if (!auth.uid) return <Redirect to='/signin' /> 
   if (project) {
     return (
@@ -20,27 +17,21 @@ const ProjectDetails = (props) => {
         <div className="card z-depth-0">
           <div className="card-content">
             <span className="card-title">{project.title}</span>
-            <p>{props.match.params.id}</p>
-
-            <p>{project.content}</p>
-            <label>Animal Type</label>
-              <p>{project.animalType}</p>
-            <label>Address</label>
-             <p>{project.address}</p>
-             <label>Zip Code</label>
-             <p>{project.zipCode}</p>
+            <p>{project.content}</p>s
           </div>
           <div className="card-action grey lighten-4 grey-text">
             <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
             <div>{moment(project.createdAt.toDate()).calendar()}</div>
-          </div>
+        </div>
+        <button onClick={props.removeProject.bind(null, id)}>Delete</button>
+
         </div>
       </div>
     )
   } else {
     return (
       <div className="container center">
-        <p>Loading project...</p>
+        <p>Loading post...</p>
       </div>
     )
   }
@@ -57,15 +48,15 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    createProject: (project) => dispatch(createProject(project))
+    removeProject: (project) => dispatch(removeProject(project, ownProps.history)),
   }
 }
 
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([{
     collection: 'projects'
   }])

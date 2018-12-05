@@ -1,4 +1,3 @@
-
 const initState = {
 
     projects: [
@@ -18,15 +17,21 @@ const projectReducer = (state = initState, action) => {
         console.log('create project error', action.err);
         return state;
        
-
-
-
-        case 'DELETE_PROJECT':
+        case 'DELETE_PROJECT_SUCCESS':
         console.log('delete project', action.project);
         return state;
 
 
         case 'DELETE_PROJECT_ERROR': 
+        console.log('delete project error', action.err);
+        return state;
+
+        case 'EDIT_PROJECT_SUCCESS':
+        console.log('delete project', action.project);
+        return state;
+
+
+        case 'EDIT_PROJECT_ERROR': 
         console.log('delete project error', action.err);
         return state;
 

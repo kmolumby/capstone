@@ -4,8 +4,9 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/storage';
 
+
 // Initialize Firebase
-var config = {
+const config = {
     apiKey: "AIzaSyAoYK6-Po20qnBuemPH1RZM6vRneCamnig",
     authDomain: "capstone-9d5eb.firebaseapp.com",
     databaseURL: "https://capstone-9d5eb.firebaseio.com",
@@ -18,6 +19,8 @@ var config = {
   firebase.initializeApp(config);
   firebase.firestore().settings({ timestampsInSnapshots: true});
   const storage = firebase.storage().ref;
+  // const db = firebase.firestore();
+
 
 
   export {

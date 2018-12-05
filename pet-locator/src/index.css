@@ -36,3 +36,8 @@ input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ff0202 !important;
 } */
+
+.project-summary:hover {
+    color: rgba(255, 255, 255, 1);
+    transform: scale(1.03);
+}
