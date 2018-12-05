@@ -3,13 +3,11 @@ import { connect } from 'react-redux'
 import { createProject } from '../../store/actions/projectActions'
 import { Redirect } from 'react-router-dom'
 
-class CreateProject extends Component {
+class EditProject extends Component {
   state = {
-    title: '',
-    content: '',
-    animalType: '', 
-    areaLastSeen: '',
-    image:''
+    title: this.props.project.title,
+    content: this.props.project.content,
+    image: this.props.project.image
     
   }
   handleChange = (e) => {
@@ -57,19 +55,7 @@ class CreateProject extends Component {
           </div>
           <div className="input-field">
             <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
-            <label htmlFor="content">Comment</label>
-          </div>
-          <div className="input-field">
-            <textarea id="animalType" className="materialize-textarea" onChange={this.handleChange}></textarea>
-            <label htmlFor="animalType">Animal Type</label>
-          </div>
-          <div className="input-field">
-            <textarea id="areaLastSeen" className="materialize-textarea" onChange={this.handleChange}></textarea>
-            <label htmlFor="areaLastSeen">Area Last Seen</label>
-          </div>
-          <div className="input-field">
-            <textarea id="contactNumber" className="materialize-textarea" onChange={this.handleChange}></textarea>
-            <label htmlFor="Contact">Contact Number</label>
+            <label htmlFor="content">Post Content</label>
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1">Create</button>
@@ -92,16 +78,19 @@ class CreateProject extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.firebase.auth
+const mapStateToProps = (state, ownProps) => {
+    // // console.log(state);
+    // const projects = state.firestore.data.projects;
+    // const project = projects ? projects[id] : null
+    return {
+    //   project: project,
+      auth: state.firebase.auth
+    }
   }
-}
 
 const mapDispatchToProps = dispatch => {
   return {
-    createProject: (project) => dispatch(createProject(project))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)
+export default connect(mapStateToProps, mapDispatchToProps)(EditProject)

@@ -1,10 +1,16 @@
-import React from 'react'
+
+import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect} from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment';
 import { removeProject } from '../../store/actions/projectActions';
+import EditProject from './EditProject'
+import { Link } from 'react-router-dom'
+
+
+
 
 const ProjectDetails = (props) => {
   const { project, auth } = props;
@@ -17,14 +23,21 @@ const ProjectDetails = (props) => {
         <div className="card z-depth-0">
           <div className="card-content">
             <span className="card-title">{project.title}</span>
-            <p>{project.content}</p>s
+            <p>{project.content}</p>
           </div>
           <div className="card-action grey lighten-4 grey-text">
+          {project.image && <img src={project.image} alt="image preview"/>}
+
             <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
             <div>{moment(project.createdAt.toDate()).calendar()}</div>
         </div>
         <button onClick={props.removeProject.bind(null, id)}>Delete</button>
-
+        <button> 
+          {/* <Link to={'/project/edit' + project.id}> Edit
+                     <EditProject project={project} key={project.id}/>
+                   </Link> */}
+        </button>
+        
         </div>
       </div>
     )
