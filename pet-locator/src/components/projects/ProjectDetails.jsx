@@ -23,7 +23,10 @@ const ProjectDetails = (props) => {
         <div className="card z-depth-0">
           <div className="card-content">
             <span className="card-title">{project.title}</span>
-            <p>{project.content}</p>
+            <p><span></span>{project.content}</p>
+            <p>{project.animalType}</p>
+            <p>{project.state}</p>
+
           </div>
           <div className="card-action grey lighten-4 grey-text">
           {project.image && <img src={project.image} alt="image preview"/>}

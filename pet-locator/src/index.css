@@ -9,13 +9,14 @@ body {
   background: url(/img/dog-owner-shadow.jpeg) no-repeat;
   background-size: 100%;
   background-position: bottom;
-  background-color: #95e8f3;
+  background-color: #202627;
   min-height: 100%;
 }
 
 form {
   padding: 20px;
   margin-top:60px;
+  margin-bottom: 60px;
 }
 
 form button, form h5 {
